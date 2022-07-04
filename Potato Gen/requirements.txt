@@ -1,16 +1,4 @@
-Libraries
-
-undetected_chromedriver -> 2.1.1
-random_word -> 1.0.7
-selenium -> 4.3.0
-string
-random
-ctypes
-msvcrt
-time
-sys
-os
-
-Python
-
-Python 3.8.6
+undetected_chromedriver==2.1.1
+random_word==1.0.7
+selenium==4.3.0
+pywin32==304
