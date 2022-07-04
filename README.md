@@ -4,6 +4,8 @@ Simple Selenium script that generates a new outlook/microsoft account with rando
 # Purpose
 This script was made mainly to create accounts to use in videogames and nowhere else.
 
+The generated accounts can be used in games such as Fortnite, Minecraft Bedrock Edition and other games that have a similar signup system.
+
 # Main Requirements
 Make sure to use a VPN, Proxy or your phone Hotspot before generating the account. (you can generate max 3 accounts per IP)
 
