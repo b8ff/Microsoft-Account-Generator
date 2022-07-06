@@ -2,11 +2,15 @@
 
 A Microsoft account generator made in Python using Undetected Chrome Driver.
 
-## Installation
+### Installation
 Install required packages:
 
 `pip install -r requirements.txt`
 
-## Usage
+---
+
+### Usage
 
 `Open PotatoGen.py using Python 3.8.6`
+
+> **Warning**
