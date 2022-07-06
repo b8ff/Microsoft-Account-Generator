@@ -13,4 +13,7 @@ Install required packages:
 
 `Open PotatoGen.py using Python 3.8.6`
 
+---
+
 > **Warning**
+> Do NOT use this for malicious purposes
