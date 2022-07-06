@@ -15,5 +15,5 @@ Install required packages:
 
 ---
 
-> **Warning**: 
+> **Warning**
 > do NOT use this for malicious purposes.
