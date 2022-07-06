@@ -1,6 +1,6 @@
-# Microsoft-Account-Creator
+# Microsoft Account Generator
 
-A Microsoft account creator made in Python using Selenium.
+A Microsoft account generator made in Python using Undetected Chrome Driver.
 
 ## Installation
 Install required packages:
