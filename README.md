@@ -3,7 +3,8 @@
 A Microsoft account generator made in Python using Undetected Chrome Driver.
 
 > **Note**
-> the generated accounts can be used in games such as Minecraft Bedrock Edition, Fortnite and games that have a similar signup system.
+> 
+> The generated accounts can be used in games such as Minecraft Bedrock Edition, Fortnite and games that have a similar signup system.
 
 ### Installation
 Install required packages:
@@ -19,4 +20,5 @@ Install required packages:
 ---
 
 > **Warning**
-> do NOT use this for malicious purposes.
+> 
+> Do NOT use this for malicious purposes.
