@@ -11,6 +11,10 @@ Install required packages:
 
 `pip install -r requirements.txt`
 
+> **Note**
+> 
+> If after installing the requirements PotatoGen still doesn't work try to open it from cmd so you can read the error.
+
 ---
 
 ### Usage
