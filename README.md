@@ -19,7 +19,7 @@ Install required packages:
 
 ### Usage
 
-`Open PotatoGen.py using Python 3.8.6`
+`Open PotatoGen.py using Python 3.10.5`
 
 ---
 
