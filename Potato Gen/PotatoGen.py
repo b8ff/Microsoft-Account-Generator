@@ -16,7 +16,7 @@ def log(step):
     print(step)
 
 def setup():
-    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4")
+    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.1")
     os.system("cls")
     os.system("color 03")
     print("""
@@ -80,14 +80,17 @@ class PotatoGen:
         self.LASTNAME_LENGTH = randint(5, 8)
 
         try:
-            self.NAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.NAME_LENGTH, maxLength=self.NAME_LENGTH).title()
-            self.LASTNAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.LASTNAME_LENGTH, maxLength=self.LASTNAME_LENGTH).title()
+            self.NAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.NAME_LENGTH, maxLength=self.NAME_LENGTH)
+            self.LASTNAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.LASTNAME_LENGTH, maxLength=self.LASTNAME_LENGTH)
 
             for CHARACTER in self.NOTLETTERS:
                 if CHARACTER in self.NAME_INPUT:
-                    self.NAME_INPUT.replace(CHARACTER, "")
+                    self.NAME_INPUT = self.NAME_INPUT.replace(CHARACTER, "")
                 if CHARACTER in self.LASTNAME_INPUT:
-                    self.LASTNAME_INPUT.replace(CHARACTER, "")
+                    self.LASTNAME_INPUT = self.LASTNAME_INPUT.replace(CHARACTER, "")
+
+            self.NAME_INPUT = self.NAME_INPUT.title()
+            self.LASTNAME_INPUT = self.LASTNAME_INPUT.title()
         except (Exception,):
             log("\nPotatoGen could not generate credentials. This is probably caused by a failed connection to the dictionary website.\nPress any key to exit...")
             self.DRIVER.close()
