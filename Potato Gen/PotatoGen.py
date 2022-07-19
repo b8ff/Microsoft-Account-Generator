@@ -5,10 +5,11 @@ from selenium.webdriver.common.by import By
 from random import randint, sample, choice
 from win32api import GetSystemMetrics
 from random_word import RandomWords
+from string import ascii_letters
 import undetected_chromedriver
+from msvcrt import getch
 from time import sleep
 import ctypes
-import msvcrt
 import sys
 import os
 
@@ -16,7 +17,7 @@ def log(step):
     print(step)
 
 def setup():
-    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.1")
+    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.2")
     os.system("cls")
     os.system("color 03")
     print("""
@@ -50,6 +51,7 @@ class PotatoGen:
 
         self.CHARACTERS = f"{ascii_lowercase}{ascii_uppercase}{digits}{punctuation}"
         self.NOTLETTERS = f"{digits}{punctuation}"
+        self.LETTERS = ascii_letters
         self.WORDS = RandomWords()
 
         self.NAME_INPUT = None
@@ -65,11 +67,11 @@ class PotatoGen:
         self.BIRTHDAY_INPUT = None
         self.BIRTHYEAR_INPUT = None
 
-        self.STORAGE = [False, 0]
+        self.STORAGE = [False, 0, True]
 
         self.start()
 
-    def credentials(self):
+    def credentials(self, dictionary):
         if self.STORAGE[0]:
             log("\nGenerating new credentials...")
         else:
@@ -79,24 +81,28 @@ class PotatoGen:
         self.NAME_LENGTH = randint(5, 8)
         self.LASTNAME_LENGTH = randint(5, 8)
 
-        try:
-            self.NAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.NAME_LENGTH, maxLength=self.NAME_LENGTH)
-            self.LASTNAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.LASTNAME_LENGTH, maxLength=self.LASTNAME_LENGTH)
+        if dictionary:
+            try:
+                self.NAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.NAME_LENGTH, maxLength=self.NAME_LENGTH)
+                self.LASTNAME_INPUT = self.WORDS.get_random_word(hasDictionaryDef="true", minLength=self.LASTNAME_LENGTH, maxLength=self.LASTNAME_LENGTH)
 
-            for CHARACTER in self.NOTLETTERS:
-                if CHARACTER in self.NAME_INPUT:
-                    self.NAME_INPUT = self.NAME_INPUT.replace(CHARACTER, "")
-                if CHARACTER in self.LASTNAME_INPUT:
-                    self.LASTNAME_INPUT = self.LASTNAME_INPUT.replace(CHARACTER, "")
+                for CHARACTER in self.NOTLETTERS:
+                    if CHARACTER in self.NAME_INPUT:
+                        self.NAME_INPUT = self.NAME_INPUT.replace(CHARACTER, "")
+                    if CHARACTER in self.LASTNAME_INPUT:
+                        self.LASTNAME_INPUT = self.LASTNAME_INPUT.replace(CHARACTER, "")
 
-            self.NAME_INPUT = self.NAME_INPUT.title()
-            self.LASTNAME_INPUT = self.LASTNAME_INPUT.title()
-        except (Exception,):
-            log("\nPotatoGen could not generate credentials. This is probably caused by a failed connection to the dictionary website.\nPress any key to exit...")
-            self.DRIVER.close()
-            os.system("color 0C")
-            msvcrt.getch()
-            exit()
+                self.NAME_INPUT = self.NAME_INPUT.title()
+                self.LASTNAME_INPUT = self.LASTNAME_INPUT.title()
+            except (Exception,):
+                log("\nPotatoGen could not generate credentials. This is probably caused by a failed connection to the dictionary website.\nPress any key to exit...")
+                self.DRIVER.close()
+                os.system("color 0C")
+                getch()
+                exit()
+        else:
+            self.NAME_INPUT = "".join(sample(self.LETTERS, self.NAME_LENGTH)).title()
+            self.LASTNAME_INPUT = "".join(sample(self.LETTERS, self.LASTNAME_LENGTH)).title()
 
         self.FULLNAME_INPUT = f"{self.NAME_INPUT}{self.LASTNAME_INPUT}{randint(1000, 9999)}"
         self.PASSWORD_INPUT = "".join(sample(self.CHARACTERS, 15))
@@ -191,11 +197,14 @@ class PotatoGen:
         except (Exception,):
             self.STORAGE[1] = 1
 
+        if input("Do you want to use a dictionary to generate credentials? (y, n): ").lower() != "y":
+            self.STORAGE[2] = False
+
         log("\nIF THE PHONE VERIFICATION SCREEN APPEARS CHANGE IP AND RESTART POTATOGEN")
 
         self.driver()
         for _ in range(self.STORAGE[1]):
-            self.credentials()
+            self.credentials(self.STORAGE[2])
             self.generate()
 
             if not self.STORAGE[0]:
@@ -210,7 +219,7 @@ class PotatoGen:
             log(f"\nSuccessfully generated {self.STORAGE[1]} Microsoft accounts!")
 
         log("Press any key to exit...")
-        msvcrt.getch()
+        getch()
         exit()
 
 
