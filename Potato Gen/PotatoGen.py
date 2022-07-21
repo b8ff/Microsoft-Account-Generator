@@ -17,7 +17,7 @@ def log(step):
     print(step)
 
 def setup():
-    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.3")
+    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.4")
     os.system("cls")
     os.system("color 03")
     print("""
@@ -189,7 +189,7 @@ class PotatoGen:
             exit()
 
         try:
-            self.STORAGE[1] = int(input("How many accounts do you want to generate? (max 5 -> recommended 4): "))
+            self.STORAGE[1] = int(input("How many accounts do you want to generate? (max 5 -> recommended 3): "))
 
             if self.STORAGE[1] > 5:
                 self.STORAGE[1] = 5
