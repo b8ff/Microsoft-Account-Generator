@@ -17,7 +17,7 @@ def log(step):
     print(step)
 
 def setup():
-    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.2")
+    ctypes.windll.kernel32.SetConsoleTitleW("PotatoGen v4.3")
     os.system("cls")
     os.system("color 03")
     print("""
@@ -46,6 +46,7 @@ class PotatoGen:
         self.DRIVERPREFERENCES = {"credentials_enable_service" : False, "profile.password_manager_enabled" : False}
         self.DRIVERTIMEOUT = 86400
         self.DRIVERVERSION = 103
+        self.DRIVERWINDOWSIZE = (450, 600)
 
         self.MICROSOFTSIGNUP = "https://signup.live.com/signup?wa=wsignin1.0&rpsnv=13&ct=1656322628&rver=7.0.6737.0&wp=MBI_SSL&wreply=https%3a%2f%2foutlook.live.com%2fowa%2f%3fnlp%3d1%26RpsCsrfState%3d84195185-8c5b-4818-2f7d-dc10a1b164aa&id=292841&aadredir=1&whr=outlook.com&CBCXT=out&lw=1&fl=dob%2cflname%2cwld&cobrandid=90015&contextid=7CD0ACC3A36D208A&bk=1656322628&uiflavor=web&lic=1&mkt=EN-EN&lc=1040&uaid=304f33a463d341388d71ab5068be748c"
 
@@ -121,8 +122,8 @@ class PotatoGen:
         log("\nStarting Chrome Driver...\n")
         self.DRIVER = undetected_chromedriver.Chrome(executable_path=self.DRIVERDIRECTORY, options=self.DRIVEROPTIONS)
 
-        self.DRIVER.set_window_size(450, 600)
-        self.DRIVER.set_window_position((round(GetSystemMetrics(0) / 2) - round(450 / 2)), (round(GetSystemMetrics(1) / 2) - round(600 / 2)))
+        self.DRIVER.set_window_size(self.DRIVERWINDOWSIZE[0], self.DRIVERWINDOWSIZE[1])
+        self.DRIVER.set_window_position((round(GetSystemMetrics(0) / 2) - round(self.DRIVERWINDOWSIZE[0] / 2)), (round(GetSystemMetrics(1) / 2) - round(self.DRIVERWINDOWSIZE[1] / 2)))
 
     def generate(self):
         if self.STORAGE[0]:
@@ -188,10 +189,10 @@ class PotatoGen:
             exit()
 
         try:
-            self.STORAGE[1] = int(input("How many accounts do you want to generate? (max 3): "))
+            self.STORAGE[1] = int(input("How many accounts do you want to generate? (max 5 -> recommended 4): "))
 
-            if self.STORAGE[1] > 3:
-                self.STORAGE[1] = 3
+            if self.STORAGE[1] > 5:
+                self.STORAGE[1] = 5
             elif self.STORAGE[1] < 1:
                 self.STORAGE[1] = 1
         except (Exception,):
